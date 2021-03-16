@@ -9,10 +9,10 @@ import (
 )
 
 type OutNya struct {
-	appCode  string `json:"appCode"`
-	appName  string `json:"appName"`
-	appLogo  string `json:"appLogo"`
-	createAt string `json:"createAt"`
+	app_code  string `json:"app_code"`
+	app_name  string `json:"app_name"`
+	app_logo  string `json:"app_logo"`
+	create_at string `json:"create_at"`
 }
 
 func GetAllAppModel() ([]OutNya, error) {
@@ -22,7 +22,7 @@ func GetAllAppModel() ([]OutNya, error) {
 
 	var outNya []OutNya
 
-	sqlStatement := `SELECT * FROM apps`
+	sqlStatement := `SELECT * FROM public.apps WHERE apps.app_publish = 'Yes'`
 
 	rows, err := db.Query(sqlStatement)
 
@@ -31,16 +31,14 @@ func GetAllAppModel() ([]OutNya, error) {
 	}
 
 	defer rows.Close()
-
 	for rows.Next() {
 		var apps OutNya
 
-		err = rows.Scan(&apps.appCode, &apps.appName, &apps.appLogo, &apps.createAt)
+		err = rows.Scan(&apps.app_code, &apps.app_name, &apps.app_logo, &apps.create_at)
 
 		if err != nil {
 			log.Fatalf("tidak bisa mengambil data. %v", err)
 		}
-
 		outNya = append(outNya, apps)
 	}
 
