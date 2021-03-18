@@ -3,7 +3,6 @@ package config
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 
@@ -34,8 +33,6 @@ func CreateConnection() *sql.DB {
 		panic(err)
 	}
 
-	fmt.Println("Sukses Konek ke Db!")
-	// return the connection
 	return db
 }
 
