@@ -27,3 +27,9 @@ func NewApp() *App {
 		UpdatedAt: time.Now(),
 	}
 }
+
+func UpdateApp() *App {
+	return &App{
+		UpdatedAt: time.Now(),
+	}
+}

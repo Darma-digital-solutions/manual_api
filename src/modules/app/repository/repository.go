@@ -7,8 +7,8 @@ import (
 //AppRepository
 type AppRepository interface {
 	Save(*model.App) (string, error)
-	// Update(string, *model.App) error
-	// Delete(string) error
+	Update(string, *model.App) (string, error)
+	Delete(string) (string, error)
 	FindByID(string) (*model.App, error)
 	FindAll() (model.Apps, error)
 }
