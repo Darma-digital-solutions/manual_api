@@ -151,6 +151,7 @@ func UpdateApp(w http.ResponseWriter, r *http.Request) {
 	if errCode != nil {
 		w.WriteHeader(http.StatusNotFound)
 		ReturnError(w, 404, "Kode tidak ditemukan")
+		return
 	}
 	var app *model.App
 	app = model.UpdateApp()
@@ -161,6 +162,7 @@ func UpdateApp(w http.ResponseWriter, r *http.Request) {
 	if errName != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		ReturnError(w, 400, "Nama aplikasi harus diisi")
+		return
 	}
 	app.Logo = r.FormValue("Logo")
 	errLogo := validation.Validate(app.Logo,
@@ -169,11 +171,13 @@ func UpdateApp(w http.ResponseWriter, r *http.Request) {
 	if errLogo != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		ReturnError(w, 400, "Logo aplikasi harus diisi")
+		return
 	}
 	out, err := appRepository.Update(params["code"], app)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		ReturnError(w, 400, "Gagal mengubah data")
+		return
 	} else {
 		res := response{
 			Status:  200,
@@ -197,11 +201,13 @@ func DeleteApp(w http.ResponseWriter, r *http.Request) {
 	if errCode != nil {
 		w.WriteHeader(http.StatusNotFound)
 		ReturnError(w, 404, "Kode tidak ditemukan")
+		return
 	}
 	out, err := appRepository.Delete(params["code"])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		ReturnError(w, 400, "Gagal menghapus data")
+		return
 	} else {
 		res := response{
 			Status:  200,
