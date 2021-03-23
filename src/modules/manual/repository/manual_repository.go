@@ -19,7 +19,7 @@ func (r *manualRepository) FindAll() (model.Manuals, error) {
 
 	query := `SELECT * FROM "manual" WHERE "manual_publish" = 'Yes' AND "delete_at" IS NULL`
 
-	var categories model.Manuals
+	var manuals model.Manuals
 
 	rows, err := r.db.Query(query)
 
@@ -38,18 +38,18 @@ func (r *manualRepository) FindAll() (model.Manuals, error) {
 			return nil, err
 		}
 
-		categories = append(categories, manual)
+		manuals = append(manuals, manual)
 	}
 
-	return categories, nil
+	return manuals, nil
 }
 func (r *manualRepository) FindByAppCode(app_code string) (model.Manuals, error) {
 
 	query := `SELECT * FROM "manual" WHERE "manual_publish" = 'Yes' AND "delete_at" IS NULL AND "app_code" = $1`
 
-	var categories model.Manuals
+	var manuals model.Manuals
 
-	rows, err := r.db.Query(query)
+	rows, err := r.db.Query(query, app_code)
 
 	if err != nil {
 		return nil, err
@@ -66,10 +66,10 @@ func (r *manualRepository) FindByAppCode(app_code string) (model.Manuals, error)
 			return nil, err
 		}
 
-		categories = append(categories, manual)
+		manuals = append(manuals, manual)
 	}
 
-	return categories, nil
+	return manuals, nil
 }
 func (r *manualRepository) FindByID(manual_code string) (*model.Manual, error) {
 

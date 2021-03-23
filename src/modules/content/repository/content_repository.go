@@ -49,7 +49,7 @@ func (r *contentRepository) FindOne(manual_code string, category_code string) (m
 
 	var contents model.Contents
 
-	rows, err := r.db.Query(query)
+	rows, err := r.db.Query(query, manual_code, category_code)
 
 	if err != nil {
 		return nil, err

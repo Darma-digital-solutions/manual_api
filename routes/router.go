@@ -35,5 +35,10 @@ func Router() *mux.Router {
 	router.HandleFunc("/api/content/{code}", controllers.UpdateContent).Methods("PUT")
 	router.HandleFunc("/api/content/{code}", controllers.DeleteContent).Methods("DELETE")
 	router.HandleFunc("/api/contentsIn/{manual_code}/{category_code}", controllers.GetContentInManualAndCategory).Methods("GET")
+
+	router.HandleFunc("/api/searchAll", controllers.GetSearchAll).Methods("POST")
+	router.HandleFunc("/api/searchOne/{app_code}", controllers.GetSearchOne).Methods("POST")
+
+	// GetSearchAll
 	return router
 }
