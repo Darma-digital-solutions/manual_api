@@ -37,11 +37,12 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 	api := router.PathPrefix("/api").Subrouter()
 	api.Use(middlewareOne)
+
 	router.HandleFunc("/public/signin", controllers.Signin).Methods("POST")
 	router.HandleFunc("/public/refresh", controllers.Refresh).Methods("POST")
 
-	api.HandleFunc("/apps", controllers.GetApps).Methods("GET")
-	// router.HandleFunc("/public/apps", controllers.GetApps).Methods("GET")
+	// api.HandleFunc("/apps", controllers.GetApps).Methods("GET")
+	router.HandleFunc("/public/apps", controllers.GetApps).Methods("GET")
 	router.HandleFunc("/public/app/{code}", controllers.GetApp).Methods("GET")
 
 	// with auth
@@ -76,8 +77,8 @@ func Router() *mux.Router {
 	api.HandleFunc("/content/{code}", controllers.UpdateContent).Methods("PUT")
 	api.HandleFunc("/content/{code}", controllers.DeleteContent).Methods("DELETE")
 
-	api.HandleFunc("/searchAll", controllers.GetSearchAll).Methods("POST")
-	api.HandleFunc("/searchOne/{app_code}", controllers.GetSearchOne).Methods("POST")
+	router.HandleFunc("/public/searchAll", controllers.GetSearchAll).Methods("POST")
+	router.HandleFunc("/public/searchOne/{app_code}", controllers.GetSearchOne).Methods("POST")
 
 	return router
 }
