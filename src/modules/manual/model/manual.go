@@ -6,30 +6,29 @@ import (
 	alias "github.com/iamJune20/dds/helper"
 )
 
-// App struct
-type App struct {
+type Manual struct {
 	Code      string
 	Name      string
-	Logo      string
+	Desc      string
+	Icon      string
+	AppCode   string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeleteAt  alias.NullTime
 	Publish   string
 }
 
-// Apps type App list
-type Apps []App
+type Manuals []Manual
 
-//NewApp App's Constructor
-func NewApp() *App {
-	return &App{
+func NewManual() *Manual {
+	return &Manual{
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
 }
 
-func UpdateApp() *App {
-	return &App{
+func UpdateManual() *Manual {
+	return &Manual{
 		UpdatedAt: time.Now(),
 	}
 }
